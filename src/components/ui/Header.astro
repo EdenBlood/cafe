@@ -1,0 +1,22 @@
+---
+import Logo from '@/assets/logo.svg'
+
+interface Props {
+  bgImage: string
+}
+
+const { bgImage } = Astro.props
+---
+
+<header class="min-h-72 relative">
+  <div
+    class="inset-0 absolute bg-center bg-cover"
+    style={{ backgroundImage: `url(${bgImage})` }}
+  >
+  </div>
+  <div class="absolute inset-0 bg-black/60"></div>
+
+  <div class="relative max-w-7xl mx-auto py-10">
+    <Logo class="w-72" />
+  </div>
+</header>
