@@ -1,6 +1,7 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import bg from "@/assets/bg_home.jpg";
+import CategoryIconLabel from '@/components/ui/CategoryIconLabel.astro';
 ---
 
 <MainLayout
@@ -8,8 +9,20 @@ import bg from "@/assets/bg_home.jpg";
   bgImage={bg.src}
   tagLine="Disfruta una deliciosa taza de Café"
 >
-  <h1 class="text-4xl font-black text-purple-700">Astro run</h1>
+  <h2 class="text-lg font-black text-c-coffee-400 text-center uppercase after:coffee-icon">
+    Conoce más
+    <span class="block text-4xl text-c-coffee-700">Sobre nosotros</span>
+  </h2>
+  <p class="text-center">Desde 1939, nuestra cafetería ha sido un rincón acogedor donde el buen café y la comida hecha con cariño son protagonistas. Aquí no solo vienes a disfrutar de una bebida: vienes a saborear el resultado de décadas de dedicación, recetas caseras y una selección cuidadosa de ingredientes frescos y de calidad.
+  </p>
+  <p class="text-center">
+  En cada plato y en cada taza encontrarás el equilibrio perfecto entre tradición y sabor. Desde nuestro café artesanal hasta nuestros desayunos, almuerzos y repostería, todo está preparado con productos naturales, sin atajos ni artificios.</p>
 
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+    <CategoryIconLabel icon="icon_coffee.svg" text="Café" />
+    <CategoryIconLabel icon="icon_dessert.svg" text="Postres" />
+    <CategoryIconLabel icon="icon_tea.svg" text="Té" />
+  </div>
   <section slot="after-main-content">
 
   </section>

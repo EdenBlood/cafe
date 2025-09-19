@@ -1,0 +1,13 @@
+---
+interface Props {
+  icon: string;
+  text: string;
+}
+
+const { icon, text} = Astro.props
+---
+
+<div class="py-10 space-y-5 flex flex-col items-center ">
+  <img src={`/${icon}`} alt={`Icono ${icon}`} class="max-w-52">
+  <h3 class="text-4xl text-c-coffee-800 font-secondary">{text}</h3>
+</div>

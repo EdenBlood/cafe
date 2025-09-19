@@ -16,4 +16,21 @@
   --color-c-coffee-800: #7c3f24;
   --color-c-coffee-900: #5e311e;
   --color-c-coffee-950: #3a1a0e;
+
+  --icon-size: 6rem;
+}
+
+@utility coffee-icon {
+  content: '';
+  background-image: url("../assets/coffee.svg");
+  background-size: var(--icon-size);
+  background-position: center;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: block;
+  margin-inline: auto;
+}
+
+@utility font-secondary {
+  font-family: "PT Sans", sans-serif;
 }
