@@ -1,1 +1,19 @@
 @import 'tailwindcss';
+
+@theme {
+  /** fonts */
+  --default-font-family: 'Outfit', sans-serif;
+
+  /** colors (c of custom) */
+  --color-c-coffee-50: #fcf8ee;
+  --color-c-coffee-100: #ebe7de;
+  --color-c-coffee-200: #ead59d;
+  --color-c-coffee-300: #dfbb6a;
+  --color-c-coffee-400: #d7a648;
+  --color-c-coffee-500: #ce8a32;
+  --color-c-coffee-600: #b66b29;
+  --color-c-coffee-700: #975026;
+  --color-c-coffee-800: #7c3f24;
+  --color-c-coffee-900: #5e311e;
+  --color-c-coffee-950: #3a1a0e;
+}
