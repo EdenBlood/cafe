@@ -1,14 +1,17 @@
 ---
 import Logo from '@/assets/logo.svg'
+import MainNav from './MainNav.astro'
 
 interface Props {
   bgImage: string
+  tagLine: string
 }
 
-const { bgImage } = Astro.props
+const { bgImage, tagLine } = Astro.props
 ---
 
-<header class="min-h-72 relative">
+<header class="min-h-72 relative pb-72">
+  <!-- Image -->
   <div
     class="inset-0 absolute bg-center bg-cover"
     style={{ backgroundImage: `url(${bgImage})` }}
@@ -16,7 +19,17 @@ const { bgImage } = Astro.props
   </div>
   <div class="absolute inset-0 bg-black/60"></div>
 
-  <div class="relative max-w-7xl mx-auto py-10">
-    <Logo class="w-72" />
+  <!-- Header -->
+  <div class="relative lg:max-w-6xl 2xl:max-w-7xl mx-auto py-3">
+    <div class="flex flex-col lg:flex-row lg:justify-between items-center">
+      <a href="/">
+        <Logo class="w-72" />
+      </a>
+      <MainNav />
+    </div>
+
+    <h1 class="mt-12 text-4xl font-black uppercase text-white text-center">
+      {tagLine}
+    </h1>
   </div>
 </header>

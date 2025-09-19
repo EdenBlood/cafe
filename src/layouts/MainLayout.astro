@@ -6,9 +6,10 @@ import '@/styles/global.css'
 interface Props {
   title: string
   bgImage: string
+  tagLine: string
 }
 
-const { title, bgImage } = Astro.props
+const { title, bgImage, tagLine } = Astro.props
 ---
 
 <!doctype html>
@@ -27,7 +28,7 @@ const { title, bgImage } = Astro.props
   </head>
 
   <body class="bg-slate-100 text-slate-900">
-    <Header bgImage={bgImage} />
+    <Header bgImage={bgImage} tagLine={tagLine} />
     <main>
       <slot />
     </main>

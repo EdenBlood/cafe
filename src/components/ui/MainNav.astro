@@ -1,0 +1,16 @@
+---
+import { navigation } from '@/consts/index'
+---
+
+<nav class="flex flex-col lg:flex-row gap-4 items-center">
+  {
+    navigation.map((navItem) => (
+      <a
+        class="text-white uppercase hover:text-c-coffee-500 text-lg font-bold"
+        href={navItem.href}
+      >
+        {navItem.name}
+      </a>
+    ))
+  }
+</nav>

@@ -1,7 +1,7 @@
 import type { NavigationState } from '@/types/index.types'
 
 //* La navegación
-const navigation: NavigationState = [
+export const navigation: NavigationState = [
   {
     name: 'Inicio',
     href: '/',
