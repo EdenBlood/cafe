@@ -1,14 +1,18 @@
 ---
+import { Picture } from 'astro:assets';
 import MainLayout from '@/layouts/MainLayout.astro'
 import { BaseWPSchema } from "@/types/index.types"
 
 const url = "http://coffee-shop.local/wp-json/wp/v2/pages?slug=nosotros";
 const res = await fetch(url);
 const json = await res.json();
-const {success, data} = BaseWPSchema.safeParse(json[0]);
-console.log(success, data);
+const {data} = BaseWPSchema.safeParse(json[0]);
 ---
 
-<MainLayout bgImage="" tagLine="" title="Nosotros">
-  <h1>Nosotros</h1>
+<MainLayout bgImage={data?.featured_images.full.url!} tagLine={data?.acf.subtitle!} title={data?.title.rendered!}>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <Picture src={data?.featured_images.medium_large.url!} alt={`Imagen de ${data?.title.rendered}`} width={data?.featured_images.medium_large.width!} height={data?.featured_images.medium_large.height!} formats={["avif", "webp" ]} />
+
+    <div class="text-xl space-y-3 mt-10 lg:mt-0" set:html={data?.content.rendered}></div>
+  </div>
 </MainLayout>
