@@ -1,5 +1,12 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro'
+import { BaseWPSchema } from "@/types/index.types"
+
+const url = "http://coffee-shop.local/wp-json/wp/v2/pages?slug=nosotros";
+const res = await fetch(url);
+const json = await res.json();
+const {success, data} = BaseWPSchema.safeParse(json[0]);
+console.log(success, data);
 ---
 
 <MainLayout bgImage="" tagLine="" title="Nosotros">
