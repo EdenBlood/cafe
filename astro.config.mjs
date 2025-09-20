@@ -18,4 +18,7 @@ export default defineConfig({
       },
     },
   },
+  image: {
+    domains: ["coffee-shop.local"]
+  }
 })
