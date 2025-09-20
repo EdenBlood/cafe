@@ -1,0 +1,41 @@
+---
+import { Picture, inferRemoteSize } from 'astro:assets';
+import MainLayout from '@/layouts/MainLayout.astro'
+import { ProcessPageSchema } from "@/types/index.types"
+
+const url = `${import.meta.env.WP_API_URL_SLUG}proceso`;
+const res = await fetch(url);
+const json = await res.json();
+const {data} = ProcessPageSchema.safeParse(json[0]);
+
+const processKeys = Array.from({length: 5}, (_, i) => `process_${i+1}`)
+---
+
+<MainLayout
+  bgImage={data?.featured_images.full.url!}
+  tagLine={data?.acf.subtitle!}
+  title={data?.title.rendered!}
+>
+  <div class="text-xl space-y-3 mt-10 lg:mt-0" set:html={data?.content.rendered}></div>
+
+  <div class="mt-10 space-y-10">
+    {processKeys.map( async (key) => {
+      const { title, description, image} = data?.acf[key]!;
+      const { width, height } = await inferRemoteSize(image);
+      return (
+        <section class="flex flex-col lg:flex-row lg:items-center gap-10 lg:even:flex-row-reverse">
+          <div class="w-full lg:w-1/2">
+            <Picture src={image} alt={`Imagen de ${title}`} width={width} height={height} />
+          </div>
+
+          <div class="w-full lg:w-1/2">
+            <h1 class="text-c-coffee-900 font-black text-4xl pb-10 uppercase">{title}</h1>
+            <p class="text-lg">{description}</p>
+          </div>
+        </section>
+      )
+    })}
+  </div>
+
+</div>
+</MainLayout>
