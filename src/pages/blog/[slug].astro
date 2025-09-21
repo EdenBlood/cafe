@@ -1,0 +1,40 @@
+---
+import PostCategory from "@/components/blog/PostCategory.astro";
+import PostMeta from "@/components/blog/PostMeta.astro";
+import MainLayout from "@/layouts/MainLayout.astro";
+import { PostSchema } from "@/types/index.types";
+import { Picture } from "astro:assets";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const url = `${import.meta.env.WP_API_URL}/posts?slug=${slug}`;
+const res = await fetch(url);
+const json = await res.json();
+const post = PostSchema.safeParse(json[0]);
+if (!post.success) return Astro.redirect("/404")
+const { category_details, content, date, featured_images, title } = post.data!;
+---
+
+<MainLayout
+  title={title.rendered}
+  tagLine={title.rendered}
+  bgImage={featured_images.full.url}
+>
+
+<article class="space-y-5 max-w-4xl mx-auto">
+  <Picture src={featured_images.full.url} alt={`Imagen del post ${title.rendered}`} width={featured_images.full.width} height={featured_images.full.height} formats={["avif", "webp"]} class="w-full object-cover object-center " />
+
+  <PostMeta date={date} />
+
+  <div class="flex gap-2">
+    {category_details.map((category) => (
+      <PostCategory category={category} />
+    ))}
+  </div>
+
+  <div set:html={content.rendered} class="text-lg space-y-3"></div>
+</article>
+
+
+</MainLayout>
