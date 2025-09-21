@@ -8,6 +8,6 @@ import type { Category } from "@/types/index.types"
   const { category } = Astro.props;
 ---
 
-<a href={`/blog/${category.slug}`} class="px-5 py-1 bg-c-coffee-600 text-white font-bold hover:bg-c-coffee-900 duration-300 transition-colors rounded-lg">
+<a href={`/blog/categoria/${category.slug}`} class="px-5 py-1 bg-c-coffee-600 text-white font-bold hover:bg-c-coffee-900 duration-300 transition-colors rounded-lg">
   {category.name}
 </a>
