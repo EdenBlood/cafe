@@ -1,0 +1,11 @@
+---
+  import { PostsSchema } from "@/types/index.types";
+  import PostCard from "./PostCard.astro";
+
+  const url = `${import.meta.env.WP_API_URL}/posts`;
+  const res = await fetch(url);
+  const json = await res.json();
+  const {data} = PostsSchema.safeParse(json);
+---
+
+{data?.map(post => <PostCard post={post} /> )}
