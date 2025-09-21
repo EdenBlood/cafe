@@ -22,10 +22,11 @@ export const BaseWPSchema = z.object({
   id: z.number(),
   title: contentRenderedSchema,
   content: contentRenderedSchema,
+  featured_images: featuredImagesSchema,
+  slug: z.string(),
   acf: z.object({
     subtitle: z.string()
   }),
-  featured_images: featuredImagesSchema,
 })
 
 const processSchema = z.object({
@@ -40,4 +41,29 @@ export const ProcessPageSchema = BaseWPSchema.extend({
   }).catchall(processSchema) // Valida todo lo que venga además de el subtitle con ese schema
 })
 
+// Post - Blog schemas
+const categorySchema = z.object({
+  name: z.string(),
+  slug: z.string(),
+})
+
+const categoriesSchema = z.array(categorySchema)
+
+export const PostSchema = BaseWPSchema.pick({
+  id: true,
+  title: true,
+  content: true,
+  featured_images: true,
+  slug:true,
+}).extend({
+  date: z.string(),
+  // updated_date:
+  category_details: categoriesSchema
+})
+
+export const PostsSchema = z.array(PostSchema)
+
+export type PostData = z.infer<typeof PostSchema>
+export type Category = z.infer<typeof categorySchema>
+// Types
 export type NavigationState = { name: string; href: string }[]
