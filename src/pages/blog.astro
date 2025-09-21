@@ -1,9 +1,9 @@
 ---
-import { Picture, inferRemoteSize } from 'astro:assets';
 import MainLayout from '@/layouts/MainLayout.astro'
 import { BaseWPSchema } from "@/types/index.types"
+import BlogPosts from '@/components/blog/BlogPosts.astro';
 
-const url = `${import.meta.env.WP_API_URL_SLUG}proceso`;
+const url = `${import.meta.env.WP_API_URL_SLUG}blog`;
 const res = await fetch(url);
 const json = await res.json();
 const {data} = BaseWPSchema.safeParse(json[0]);
@@ -16,5 +16,6 @@ const {data} = BaseWPSchema.safeParse(json[0]);
 >
   <div class="text-xl space-y-3 mt-10 lg:mt-0" set:html={data?.content.rendered}></div>
 
+  <BlogPosts />
 </div>
 </MainLayout>
