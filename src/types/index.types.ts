@@ -42,12 +42,14 @@ export const ProcessPageSchema = BaseWPSchema.extend({
 })
 
 // Post - Blog schemas
-const categorySchema = z.object({
+export const categorySchema = z.object({
+  id: z.number(),
   name: z.string(),
   slug: z.string(),
 })
 
 const categoriesSchema = z.array(categorySchema)
+export const CategoriesSlugSchema = z.array(categorySchema.pick({slug:true}))
 
 export const PostSchema = BaseWPSchema.pick({
   id: true,
