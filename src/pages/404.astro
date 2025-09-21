@@ -1,0 +1,16 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import bg_404 from "@/assets/bg_404.jpg"
+
+---
+
+<MainLayout
+  title="Página no encontrada"
+  tagLine="Página no Encontrada"
+  bgImage={bg_404.src}
+>
+  <p class="text-center text-lg">
+    Tal vez quieras volver al {""}
+    <a href="/" class="text-c-coffee-600 hover:text-c-coffee-900 font-bold transition-colors duration-300">Inicio</a>
+  </p>
+</MainLayout>
