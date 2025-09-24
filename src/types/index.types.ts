@@ -29,6 +29,22 @@ export const BaseWPSchema = z.object({
   }),
 })
 
+// Gallery schemas
+
+const galleryImage = z.object({
+  large: imageSchema,
+  full: imageSchema,
+})
+
+const galleryImagesSchema = z.array(galleryImage);
+
+export const GalleryPageSchema = BaseWPSchema.extend({
+  gallery: galleryImagesSchema,
+})
+
+export type Gallery = z.infer<typeof galleryImage>;
+
+// Process schemas
 const processSchema = z.object({
   title: z.string(),
   description: z.string(),
