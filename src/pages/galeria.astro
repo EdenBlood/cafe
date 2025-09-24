@@ -1,0 +1,14 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro'
+import { GalleryPageSchema } from "@/types/index.types"
+import GalleryGrid from '@/components/gallery/GalleryGrid.astro';
+
+const url = `${import.meta.env.WP_API_URL_SLUG}galeria`;
+const res = await fetch(url);
+const json = await res.json();
+const {data} = GalleryPageSchema.safeParse(json[0]);
+---
+
+<MainLayout bgImage={data?.featured_images.full.url!} tagLine={data?.acf.subtitle!} title={data?.title.rendered!}>
+  <GalleryGrid gallery={data?.gallery!} />
+</MainLayout>
