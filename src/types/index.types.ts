@@ -81,7 +81,46 @@ export const PostSchema = BaseWPSchema.pick({
 
 export const PostsSchema = z.array(PostSchema)
 
+// Menu schemas
+const MenuItemSchema = BaseWPSchema.pick({
+  title: true,
+  featured_images: true
+}).extend({
+  acf: z.object({
+    description: z.string(),
+    price: z.coerce.number() // coerce intenta convertir un string a un number y si no puede, retorna un error;
+  })
+})
+
+export const MenuItemsSchema = z.array(MenuItemSchema);
+
+
+// Contacto Schema
+
+const markerSchema = z.object({
+  label: z.string(),
+  lat: z.number(),
+  lng: z.number(),
+})
+
+const locationSchema = z.object({
+  lat: z.number(),
+  lng: z.number(),
+  zoom: z.number(),
+  markers: z.array(markerSchema)
+})
+
+export const ContactPageSchema = BaseWPSchema.extend({
+  acf: z.object({
+    subtitle: z.string()
+  }).catchall(locationSchema)
+});
+
+// Types
+
 export type PostData = z.infer<typeof PostSchema>
 export type Category = z.infer<typeof categorySchema>
-// Types
 export type NavigationState = { name: string; href: string }[]
+
+export type FeaturedImages= z.infer<typeof featuredImagesSchema>;
+export type Location = z.infer<typeof locationSchema>;
