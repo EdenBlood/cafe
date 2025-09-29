@@ -1,0 +1,33 @@
+---
+import { MenuItemsSchema } from "@/types/index.types";
+import MenuItem from "@/components/menu/MenuItem.astro";
+
+const url = `${import.meta.env.WP_API_URL}/products?product_categories=6`
+const res = await fetch(url);
+const json = await res.json();
+const data = MenuItemsSchema.parse(json);
+---
+
+<div>
+  <h4 class="text-white font-black text-4xl uppercase text-center my-10">Comida</h4>
+
+  <ul class="space-y-3" id="coffee-menu-food">
+    {
+      data.map((item) => (
+        <MenuItem images={item.featured_images} title={item.title.rendered} description={item.acf.description} price={item.acf.price} />
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox"
+  import "photoswipe/style.css";
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#coffee-menu-food",
+    children: "a",
+    pswpModule: () => import("photoswipe")
+  })
+  lightbox.init();
+</script>
