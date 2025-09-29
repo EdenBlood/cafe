@@ -1,0 +1,49 @@
+---
+import type { Location } from '@/types/index.types'
+
+interface Props {
+  location: Location
+}
+
+const { location } = Astro.props;
+---
+
+<div>
+  <h3 class="text-c-coffee-900-coffee font-black text-center text-2xl uppercase mb-5">Ubicación</h3>
+  <div id="map" class="h-[500px]"></div>
+
+  <location-data
+    data-lat={location.lat}
+    data-lng={location.lng}
+    data-zoom={location.zoom}
+    data-label={location.markers[0].label}
+    data-markerlat={location.markers[0].lat}
+    data-markerlng={location.markers[0].lng}
+  />
+</div>
+
+<script>
+  import L from "leaflet";
+  import "leaflet/dist/leaflet.css";
+
+  class LocationData extends HTMLElement {
+    connectedCallback() {
+      const lat = this.dataset.lat;
+      const lng = this.dataset.lng;
+      const zoom = this.dataset.zoom;
+      const label = this.dataset.label;
+      const markerLat = this.dataset.markerlat;
+      const markerLng = this.dataset.markerlng;
+
+      if(lat && lng && zoom && label && markerLat && markerLng) {
+        const map = L.map("map").setView([+lat,+lng], +zoom);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+        L.marker([+markerLat,+markerLng]).addTo(map)
+          .bindPopup(label)
+          .openPopup()
+      }
+    }
+  }
+
+  customElements.define("location-data", LocationData)
+</script>
