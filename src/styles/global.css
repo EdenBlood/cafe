@@ -34,3 +34,7 @@
 @utility font-secondary {
   font-family: "PT Sans", sans-serif;
 }
+
+@utility bg-menu-image {
+  background-image: url("../assets/menu_artwork.svg");
+}
