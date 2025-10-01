@@ -2,6 +2,7 @@
 import MainLayout from '@/layouts/MainLayout.astro'
 import { ContactPageSchema } from '@/types/index.types';
 import LocationMap from "@/components/contact/LocationMap.astro"
+import ContactForm from "@/components/contact/ContactForm.astro"
 
 const url = `${import.meta.env.WP_API_URL_SLUG}contacto`;
 const res = await fetch(url);
@@ -14,7 +15,7 @@ const data = ContactPageSchema.parse(json[0]);
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
     <div>
-
+      <ContactForm />
     </div>
     <LocationMap
       location={data.acf.location}
