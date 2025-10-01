@@ -1,0 +1,90 @@
+<div>
+  <h3 class="text-c-coffee-900 font-black text-center text-2xl uppercase mb-5">Contacto</h3>
+
+  <form
+    method="post"
+    class="space-y-3"
+    novalidate
+  >
+    <legend class="text-xl">Llena todos los campos para enviar un mensaje.</legend>
+
+    <div class="flex flex-col space-y-3">
+      <label class="input-label">
+        Nombre:
+        <input id="name" name="name" type="text" placeholder="Tu nombre..." class="input-field ">
+      </label>
+    </div>
+    <div class="flex flex-col space-y-3">
+
+      <label class="input-label">
+        Email:
+        <input id="email" name="email" type="text" placeholder="Tu email..." class="input-field">
+      </label>
+    </div>
+    <div class="flex flex-col space-y-3">
+      <label class="input-label">
+
+        Asunto:
+        <input id="subject" name="subject" type="text" placeholder="Asunto del mensaje..." class="input-field">
+      </label>
+    </div>
+
+    <div class="flex flex-col space-y-3">
+      <label class="input-label">
+        Contenido:
+        <textarea id="message" name="message" placeholder="Tu mensaje..." class="input-field h-32">
+        </textarea>
+      </label>
+    </div>
+
+    <input
+      type="submit"
+      value="Enviar"
+      class="bg-c-coffee-900 w-full p-3 text-white uppercase font-bold cursor-pointer hover:bg-c-coffee-700 text-2xl"
+    >
+  </form>
+</div>
+
+<script>
+  import { actions, isInputError } from "astro:actions";
+import { GENERIC_FALLBACK_NAMES } from "node_modules/astro/dist/assets/fonts/constants";
+  import { Notyf } from "notyf";
+  import "notyf/notyf.min.css";
+
+  let formData = {
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  }
+
+  const form = document.querySelector("form");
+
+  form?.addEventListener("submit", async (e: SubmitEvent) => {
+    e.preventDefault()
+
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form);
+
+    // Mandamos a llamar el action.
+    const { data, error } = await actions.contact.sendEmail(formData);
+    const inputErrors = isInputError(error) ? error.issues : [];
+
+    const notyf = new Notyf({
+      position: {x: "right", y: "top"},
+      duration: 5000,
+      ripple: false,
+      dismissible: true
+    })
+
+    if (inputErrors) {
+      inputErrors.forEach(error => notyf.error(error.message))
+      return;
+    }
+
+    if (data?.message && !data?.error) {
+      notyf.success(data.message);
+      form.reset();
+    }
+  })
+</script>
