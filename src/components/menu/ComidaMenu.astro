@@ -30,4 +30,10 @@ const data = MenuItemsSchema.parse(json);
     pswpModule: () => import("photoswipe")
   })
   lightbox.init();
+
+
+  // Solución al error que no instancía lightbox cuando navegas por las páginas.
+  document.addEventListener("astro:after-swap", function() {
+    lightbox.init();
+  })
 </script>
