@@ -2,6 +2,8 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import bg from "@/assets/bg_home.jpg";
 import CategoryIconLabel from '@/components/ui/CategoryIconLabel.astro';
+import HomeGallery from '@/components/gallery/HomeGallery.astro';
+import ProductsMenu from '@/components/menu/ProductsMenu.astro';
 ---
 
 <MainLayout
@@ -23,7 +25,7 @@ import CategoryIconLabel from '@/components/ui/CategoryIconLabel.astro';
     <CategoryIconLabel icon="icon_dessert.svg" text="Postres" />
     <CategoryIconLabel icon="icon_tea.svg" text="Té" />
   </div>
-  <section slot="after-main-content">
 
-  </section>
+  <HomeGallery slot="after-main-content" />
+  <ProductsMenu slot="after-main-content" />
 </MainLayout>
