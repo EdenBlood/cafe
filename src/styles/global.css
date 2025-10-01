@@ -38,3 +38,10 @@
 @utility bg-menu-image {
   background-image: url("../assets/menu_artwork.svg");
 }
+
+@utility input-label {
+  @apply text-c-coffee-900 uppercase font-bold text-lg
+}
+@utility input-field {
+  @apply border-c-coffee-900 border-2 p-2 block w-full
+}
