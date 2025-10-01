@@ -1,12 +1,18 @@
 ---
 import { navigation } from '@/consts/index'
+
+const currentPath = Astro.url.pathname;
+function isActive(href:string):boolean {
+  if (href === "/") return currentPath === "/"
+  return currentPath.startsWith(href);
+}
 ---
 
 <nav class="flex flex-col lg:flex-row gap-4 items-center">
   {
     navigation.map((navItem) => (
       <a
-        class="text-white uppercase hover:text-c-coffee-500 text-lg font-bold"
+        class={`${isActive(navItem.href) ? "text-c-coffee-500" : "text-white hover:text-c-coffee-500 "} uppercase  text-lg font-bold`}
         href={navItem.href}
       >
         {navItem.name}
