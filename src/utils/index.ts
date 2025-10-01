@@ -14,3 +14,7 @@ export function formatCurrency(amount :string | number): string {
     currency: "USD",
   }).format(amount)
 };
+
+export function nullToEmptyString(arg: unknown) :string {
+  return arg ?? "";
+}
