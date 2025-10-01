@@ -12,6 +12,7 @@
     "@tailwindcss/vite": "4.1.13",
     "astro": "5.13.9",
     "leaflet": "^1.9.4",
+    "notyf": "^3.10.0",
     "photoswipe": "^5.4.4",
     "tailwindcss": "4.1.13"
   },
